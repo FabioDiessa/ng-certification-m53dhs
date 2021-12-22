@@ -1,0 +1,51 @@
+<hr />
+<h4>Template for 5-day forecast page:</h4>
+<div class="container-fluid">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">5-day forecast for {{ cityName }}</h3>
+    </div>
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let city of forecast; let i = index">
+        {{ week[i] }} {{ city.weather.main }} - Min:
+        {{ city.temperature.temp_min }} - Max: {{ city.temperature.temp_max }}
+        <div [ngSwitch]="city.weather.icon">
+          <img
+            class="icon"
+            *ngSwitchCase="'clear'"
+            src="https://www.angulartraining.com/images/weather/sun.png"
+          />
+          <img
+            class="icon"
+            *ngSwitchCase="'snow'"
+            src="https://www.angulartraining.com/images/weather/snow.png"
+          />
+          <img
+            class="icon"
+            *ngSwitchCase="'clouds'"
+            src="https://www.angulartraining.com/images/weather/clouds.png"
+          />
+          <img
+            class="icon"
+            *ngSwitchCase="'rain'"
+            src="https://www.angulartraining.com/images/weather/rain.png"
+          />
+          <img
+            class="icon"
+            *ngSwitchCase="'mist'"
+            src="https://www.angulartraining.com/images/weather/rain.png"
+          />
+          <img *ngSwitchDefault src="" />
+        </div>
+      </li>
+    </ul>
+  </div>
+  <button
+    class="btn btn-success"
+    tabindex="0"
+    id="mainPageBtn"
+    (click)="goBack()"
+  >
+    &lt; Back to main page
+  </button>
+</div>

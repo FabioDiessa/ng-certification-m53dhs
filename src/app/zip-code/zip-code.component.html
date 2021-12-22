@@ -1,0 +1,41 @@
+<div class="well">
+  <h2>Enter a zipcode:</h2>
+  <form
+    [formGroup]="addZipCodeForm"
+    id="addZipCodeForm"
+    (ngSubmit)="addLocation(zipCode)"
+    (input)="cityNotFound = false; alreadyInsertCity = false"
+  >
+    <div class="form-group">
+      <em> insert 5 digits</em>
+      <em class="error" *ngIf="!validateZipCode() && zipCode?.errors?.required">
+        Required</em
+      >
+      <em class="error" *ngIf="zipCode?.errors?.maxlength">
+        max lenght is 5 digits</em
+      >
+      <em class="error" *ngIf="cityNotFound"> city not found</em>
+      <em class="error" *ngIf="alreadyInsertCity"> city already added</em>
+      <input
+        formControlName="zipCode"
+        name="zipCode"
+        type="text"
+        class="form-control"
+        placeholder="Zipcode"
+      />
+    </div>
+    <button
+      class="btn btn-primary"
+      id="addLocationBtn"
+      [disabled]="addZipCodeForm.invalid"
+    >
+      Add location
+    </button>
+  </form>
+</div>
+<div *ngFor="let city of zipCodes">
+  <app-current-city-weather
+    [cityZipCode]="city"
+    (removeCity)="removeCity($event)"
+  ></app-current-city-weather>
+</div>
